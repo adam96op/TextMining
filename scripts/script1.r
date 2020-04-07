@@ -16,7 +16,7 @@ dir.create(outputDir, showWarnings = TRUE)
 dir.create(workspaceDir, showWarnings = TRUE)
 #utworzenie korpusu dokument√≥w
 
-corpusDir <-  paste(inputDir,"\\","Literatura - streszczenia - orygina≈Ç",sep="")
+corpusDir <-  paste(inputDir,"\\","Literatura - streszczenia - orygina≥",sep="")
 corpus <- VCorpus(
   DirSource(corpusDir,
       pattern="*.txt",
@@ -59,8 +59,8 @@ lemmatize <- function(text) {
   new_text_vec <- hunspell_stem(parsed_text[[1]], dict=polish)
   for ( i in 1:length(new_text_vec)) {
     
-    if(lenght(new_text_vec[[1]]) == 0) new_text_vec[i] <- parsed_text[[1]][i]
-    if(lenght(new_text_vec[[1]]) > 1) new_text_vec[i] <- parsed_text[[i]][1]
+    if(length(new_text_vec[[1]]) == 0) new_text_vec[i] <- parsed_text[[1]][i]
+    if(length(new_text_vec[[1]]) > 1) new_text_vec[i] <- parsed_text[[i]][1]
   }
   new_text <- paste(new_text_vec, collapse = " ")  
   return(new_text)
@@ -80,7 +80,7 @@ corpus <- tm_map(corpus, cut_extensions)
 
 # eksport zawartoúci korpusu do plikÛw tekstowych
 
-preprocessedDir <- paste(outputDir, "Literatura - streszczenia - orygina≈Ç",sep="\\")
+preprocessedDir <- paste(outputDir, "Literatura - streszczenia - przetworzone",sep="\\")
 dir.create(preprocessedDir)
 writeCorpus(corpus, path = preprocessedDir)
 
