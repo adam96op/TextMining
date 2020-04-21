@@ -12,7 +12,7 @@ outputDir <-".\\result"
 workspaceDir <-".\\workspaces"
 dir.create(outputDir, showWarnings = TRUE)
 dir.create(workspaceDir, showWarnings = TRUE)
-#utworzenie korpusu dokumentĂłw
+#utworzenie korpusu dokumentÄ‚Ĺ‚w
 
 corpusDir <-  paste(inputDir,"\\","Literatura - streszczenia - przetworzone",sep="")
 corpus <- VCorpus(
@@ -28,7 +28,7 @@ corpus <- VCorpus(
 )
 
 
-# usunięcie rozszerzenia z nazw plików
+# usuniÄ™cie rozszerzenia z nazw plikĂłw
 cut_extensions <- function(document){
   
   meta(document, "id") <- gsub(pattern = "\\.txt$", replacement= "", meta(document, "id"))
@@ -37,7 +37,7 @@ cut_extensions <- function(document){
 
 corpus <- tm_map(corpus, cut_extensions)
 
-#utworzenie macierzy gęstości
+#utworzenie macierzy gÄ™stoĹ›ci
 tdmTfall <- TermDocumentMatrix(corpus)
 dtmTfall <- DocumentTermMatrix(corpus)
 tdmBinAll <- TermDocumentMatrix(
@@ -94,7 +94,7 @@ tdmTfidfBounds <- TermDocumentMatrix(
   tdmTfidfBoundsMatrix  <- as.matrix(tdmTfidfBounds)
   dtmTfidfBoundsMatrix <- as.matrix(dtmTfidfBounds)
   
-  #eskport macierzy gęstości do pliku .csv
+  #eskport macierzy gÄ™stoĹ›ci do pliku .csv
   matrixFile <- paste(outputDir,
                     "tdmTfBounds.csv",
                      sep="\\")

@@ -14,9 +14,9 @@ scriptDir <- ".\\scripts"
 workspaceDir <-".\\workspaces"
 dir.create(outputDir, showWarnings = TRUE)
 dir.create(workspaceDir, showWarnings = TRUE)
-#utworzenie korpusu dokumentów
+#utworzenie korpusu dokumentĂłw
 
-corpusDir <-  paste(inputDir,"\\","Literatura - streszczenia - orygina�",sep="")
+corpusDir <-  paste(inputDir,"\\","Literatura - streszczenia - oryginał",sep="")
 corpus <- VCorpus(
   DirSource(corpusDir,
       pattern="*.txt",
@@ -29,7 +29,11 @@ corpus <- VCorpus(
   
 )
 
-#dostępne przetwarzanie
+#usunięcie z tekstów podziału na akapity
+pasteParagraphs <- content_transformer(function(x,char) paste(x, collapse = char))
+coprus <- tm_map(corpus, pasteParagraphs, " ")
+
+#dostÄ™pne przetwarzanie
 
 corpus <-tm_map(corpus, removeNumbers)
 corpus <-tm_map(corpus, removePunctuation)
@@ -43,7 +47,7 @@ stoplist <-readLines(
 corpus <-tm_map(corpus, removeWords, stoplist)
 corpus <-tm_map(corpus, stripWhitespace)
 
-#usuni�cie em dash i 3/4
+#usunięcie em dash i 3/4
 
 remove_char <- content_transformer(function(x,pattern) gsub(pattern, "", x))
 corpus <- tm_map(corpus, remove_char, inToUtf8(8722))
@@ -69,7 +73,7 @@ lemmatize <- function(text) {
 
 corpus <- tm_map(corpus, content_transformer(lemmatize))
 
-# usuni�cie rozszerzenia z nazw plik�w
+# usunięcie rozszerzenia z nazw plików
 cut_extensions <- function(document){
   
   meta(document, "id") <- gsub(pattern = "\\.txt$", replacement= "", meta(document, "id"))
@@ -78,7 +82,7 @@ cut_extensions <- function(document){
 
 corpus <- tm_map(corpus, cut_extensions)
 
-# eksport zawarto�ci korpusu do plik�w tekstowych
+# eksport zawartości korpusu do plików tekstowych
 
 preprocessedDir <- paste(outputDir, "Literatura - streszczenia - przetworzone",sep="\\")
 dir.create(preprocessedDir)

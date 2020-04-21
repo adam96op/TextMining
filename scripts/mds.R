@@ -1,4 +1,4 @@
-# załadowanie bibliotek
+# zaĹ‚adowanie bibliotek
 library(proxy)
 
 #zmiana katologu roboczego
@@ -8,9 +8,9 @@ setwd(workDir)
 #definicja katalogu ze skryptami
 scriptDir <- ".\\scripts"
 
-#załadowanie skryptu
+#zaĹ‚adowanie skryptu
 sourceFile <-  paste(scriptDir,
-                     "script2.R",
+                     "frequency_matrix.R",
                      sep="\\"
 )
 
